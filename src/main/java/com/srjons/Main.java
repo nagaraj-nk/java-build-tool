@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            Process process = Runtime.getRuntime().exec("gradle build", null, new File(args[0]));
+            Process process = Runtime.getRuntime().exec("/opt/scanner-app/bin/gradle/bin/gradle build", null, new File(args[0]));
             InputStream inputStream = process.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String line;
