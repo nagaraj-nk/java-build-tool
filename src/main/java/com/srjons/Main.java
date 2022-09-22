@@ -1,14 +1,27 @@
 package com.srjons;
 
-import org.json.JSONObject;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class Main {
+    static final String WORK_DIR = "E:\\Downloads\\test-gradle\\test-gradle";
+
     public static void main(String[] args) {
-        System.out.println("Hello world!");
-
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("name", "Raj");
-
-        System.out.println("jsonObject = " + jsonObject);
+        try {
+            Process process = Runtime.getRuntime().exec("gradle build", null, new File(args[0]));
+            InputStream inputStream = process.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                System.out.println("line = " + line);
+            }
+            bufferedReader.close();
+            inputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("error: " + e.getMessage());
+        }
     }
 }
